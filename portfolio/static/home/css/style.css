@@ -1,0 +1,33 @@
+body{
+font-family: 'Montserrat', sans-serif;
+background-color: #ebfbfc;
+}
+.p-10{
+padding: 60px;
+padding-top: 100px;
+}
+.navbar-text{
+padding: 5px 20px;
+font-size: 30px;
+}
+.mukta-font{
+font-family: 'Mukta', sans-serif;
+}
+.carousel-indicators [data-bs-target]{
+  background-color: gray;
+}
+.carousel-indicators .active {
+ background-color: #57b4f7;
+}
+.icon{
+    width: 40%;
+    padding: 20px;
+    padding-bottom: 0px;
+}
+.pro-font{
+    color: black;
+}
+.footer-icon{
+    width: 50px;
+    margin: 20px;
+}
