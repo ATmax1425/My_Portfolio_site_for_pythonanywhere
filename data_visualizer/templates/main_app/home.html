@@ -1,0 +1,56 @@
+{% extends 'main_app/base.html' %}
+{% block title %}Data Visualizer{% endblock %}
+
+
+{% block content %}
+{% if messages %}
+{% for msg in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+        <use xlink:href="#exclamation-triangle-fill"/>
+    </svg>
+    <div>
+        <h6>{{msg}}</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="container">
+    <div class="d-flex justify-content-evenly mt-5">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Try data Samples
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Load Sample data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <a class="btn btn-primary m-1" role="option" href="{% url 'visualizer' 'car_crashes' %}">car
+                                crashes data</a>
+                            <a class="btn btn-primary m-1" role="option" href="{% url 'visualizer' 'planets' %}">planets
+                                data</a>
+                            <a class="btn btn-primary m-1" role="option" href="{% url 'visualizer' 'titanic' %}">titanic
+                                data</a>
+                            <a class="btn btn-primary m-1" role="option" href="{% url 'visualizer' 'tips' %}">tips
+                                data</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

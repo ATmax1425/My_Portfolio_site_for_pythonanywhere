@@ -1,0 +1,100 @@
+{% extends 'main_app/visualizer.html' %}
+{% block attributes %}
+<form action="{% url 'distribution' chart %}" method="post">
+    {% csrf_token %}
+    <div class="row d-flex">
+        <div class="col-2">
+            <label for="xAxisSelect">x-axis</label>
+            <select class="form-select form-select-sm" id="xAxisSelect" name="x_value">
+                {% for attribute in attributes %}
+                <option>{{ attribute }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% if 'y_value' in required %}
+        <div class="col-2">
+            <label for="yAxisSelect">y-axis</label>
+            <select class="form-select form-select-sm" id="yAxisSelect" name="y_value">
+                <option selected>None</option>
+                {% for attribute in attributes %}
+                <option>{{ attribute }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div class="col-2">
+            <label for="HueSelect">Hue</label>
+            <select class="form-select form-select-sm" id="HueSelect" name="hue">
+                <option selected>None</option>
+                {% for attribute in attributes %}
+                <option>{{ attribute }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% if 'multiple' in required %}
+        <div class="col-2">
+            <label for="MultipleSelect">Multiple</label>
+            <select class="form-select form-select-sm" id="MultipleSelect" name="multiple">
+                <option selected value="layer">Layer</option>
+                <option value="dodge">Dodge</option>
+                <option value="stack">Stack</option>
+                <option value="fill">Fill</option>
+            </select>
+        </div>
+        {% endif %}
+        {% if 'stat' in required %}
+        <div class="col-2">
+            <label for="StatSelect">Stat</label>
+            <select class="form-select form-select-sm" id="StatSelect" name="stat">
+                <option selected value="proportion">Proportion</option>
+                <option value="count">Count</option>
+            </select>
+        </div>
+        {% endif %}
+        <div class="col-2 ms-auto" style="padding-top: 1.2rem">
+            <button type="submit" class="btn btn-outline-dark">Make chart</button>
+        </div>
+    </div>
+
+    <div class="d-flex row">
+        <div class="col-2 pt-3">
+            {% if 'fill' in required %}
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="fill" value="option1"
+                       checked>
+                <label class="form-check-label" for="inlineCheckbox1">fill</label>
+            </div>
+            {% endif %}
+            {% if 'kde' in required %}
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="kde" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">kde</label>
+            </div>
+            {% endif %}
+        </div>
+        {% if 'bins' in required %}
+        <div class="col-2">
+            <label for="BinsSelect">Bins</label>
+            <input class="form-control form-control-sm" type="number" placeholder="0" id="BinsSelect" name="bins">
+        </div>
+        {% endif %}
+        {% if 'shrink' in required %}
+        <div class="col-2">
+            <label for="ShrinkSelect">Shrink</label>
+            <select class="form-select form-select-sm" id="ShrinkSelect" name="shrink">
+                <option selected value="10">10</option>
+                {% for shrink_ in shrink_in %}
+                <option>{{ shrink_ }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div class="col-2 ms-auto" style="padding-top: 1.3rem">
+            <a class="btn btn-outline-dark" href="{% url 'show_data' %}" role="button" target="_blank">
+                Show row data
+            </a>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

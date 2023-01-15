@@ -1,0 +1,28 @@
+{% extends 'main_app/base.html' %}
+{% block title %}Your data{% endblock %}
+
+
+{% block content %}
+<div class="container pt-1">
+    <table class="table table-striped-columns table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">index</th>
+            {% for column in columns %}
+            <th scope="col">{{ column }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {% for i,row_values in all_values %}
+        <tr>
+            <th scope="row">{{ i |add:1}}</th>
+            {% for value in row_values %}
+            <td>{{value}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'main_app/visualizer.html' %}
+{% block attributes %}
+<form action="{% url 'categorical' chart %}" method="post">
+    {% csrf_token %}
+    <!--First row-->
+    <div class="row d-flex">
+        <div class="col-2">
+            <label for="xAxisSelect">x-axis</label>
+            <select class="form-select form-select-sm" id="xAxisSelect" name="x_value">
+                {% for attribute in attributes %}
+                <option>{{ attribute }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% if 'y_value' in required %}
+        <div class="col-2">
+            <label for="yAxisSelect">y-axis</label>
+            <select class="form-select form-select-sm" id="yAxisSelect" name="y_value">
+                <option selected>None</option>
+                {% for attribute in attributes %}
+                <option>{{ attribute }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div class="col-2">
+            <label for="HueSelect">Hue</label>
+            <select class="form-select form-select-sm" id="HueSelect" name="hue">
+                <option selected>None</option>
+                {% for attribute in attributes %}
+                <option>{{ attribute }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-2">
+            <label for="PaletteSelect">Palette</label>
+            <select class="form-select form-select-sm" id="PaletteSelect" name="palette">
+                <option selected>default</option>
+                <option value="deep">Deep</option>
+                <option value="muted">Muted</option>
+                <option value="bright">Bright</option>
+                <option value="pastel">Pastel</option>
+                <option value="dark">Dark</option>
+                <option value="colorblind">Colorblind</option>
+            </select>
+        </div>
+        <div class="col-2 ms-auto" style="padding-top: 1.2rem">
+            <button type="submit" class="btn btn-outline-dark">Make chart</button>
+        </div>
+    </div>
+    <!--Second row-->
+    <div class="d-flex row">
+        <div class="col-2 ms-auto" style="padding-top: 1.3rem">
+            <a class="btn btn-outline-dark" href="{% url 'show_data' %}" role="button" target="_blank">
+                Show row data
+            </a>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

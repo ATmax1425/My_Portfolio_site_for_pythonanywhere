@@ -1,0 +1,54 @@
+{% extends 'main_app/base.html' %}
+{% block title %}Visualizer{% endblock %}
+
+{% block content %}
+<div class="">
+    <div class="row m-0" style="height: 600px;">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 w-25 p-0">
+            <!-- Select chart -->
+            <div class="h-100 px-2 border">
+                <div class="py-1">
+                    <h3 class="text-muted">Relational plots</h3>
+                    <a class="btn btn-outline-dark" href="{% url 'relational' 'scatter' %}" role="button">Scatter chart</a>
+                    <a class="btn btn-outline-dark" href="{% url 'relational' 'line' %}" role="button">Line chart</a>
+                </div>
+                <div class="py-1">
+                    <h3 class="text-muted">Distribution plots</h3>
+                    <a class="btn btn-outline-dark" href="{% url 'distribution' 'histogram' %}" role="button">Histograms</a>
+                    <a class="btn btn-outline-dark" href="{% url 'distribution' 'kde' %}" role="button">KDE</a>
+                    <a class="btn btn-outline-dark" href="{% url 'distribution' 'ecd' %}" role="button">ECDF</a>
+                </div>
+                <div class="py-1">
+                    <h3 class="text-muted">Categorical plots</h3>
+                    <a class="btn btn-outline-dark" href="{% url 'categorical' 'bar' %}" role="button">Bar Chart</a>
+                    <a class="btn btn-outline-dark" href="{% url 'categorical' 'count' %}" role="button">Count Chart</a>
+                </div>
+                <hr class="rounded">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 w-75 p-0">
+            <!-- attributes -->
+            <div class="h-25 p-3 border pb-1">
+                {% block attributes %}
+                <div class="d-flex row">
+                    <div class="col-2 ms-auto" style="padding-top: 4.9rem">
+                        <a class="btn btn-outline-dark" href="{% url 'show_data' %}" role="button" target="_blank">
+                            Show row data
+                        </a>
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+            <!-- Show chart -->
+            <div class="h-75 p-3 border p-1">
+                {% if plot_url %}
+                <img src="data:image/png;base64, {{ plot_url }}">
+                {% else %}
+                Show chart
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
